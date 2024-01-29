@@ -1,4 +1,4 @@
-# Advent of Code 2023 - Day 1 - Part 1
+# Advent of Code - 2023 - Day 1 - Part 1
 
 FILE = "../input.txt"
 
@@ -15,6 +15,7 @@ def main():
     sum_numbers = 0
     with open(FILE, "r") as f:
         for line in f.readlines():
+            print(line.__str__().strip())
             numbers = get_numbers(line)
             if len(numbers) < 1:
                 continue
