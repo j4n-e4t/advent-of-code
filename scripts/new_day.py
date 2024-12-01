@@ -1,8 +1,19 @@
 import os
 from datetime import datetime
+from sys import stdin
 
-year = datetime.now().year
-day = datetime.now().day
+# read year and day from stdin
+print("Enter year [current year]:")
+year = stdin.readline().strip()
+
+print("Enter day [current day]:")
+day = stdin.readline().strip()
+
+if year == "":
+    year = datetime.now().year
+
+if day == "":
+    day = datetime.now().day
 
 if not os.path.exists(f"{year}"):
     os.mkdir(f"{year}")
