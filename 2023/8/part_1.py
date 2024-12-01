@@ -1,41 +1,27 @@
-FILE = "input.txt"
+instructions = []
+locations = {}
+steps = 0
+current_location = "AAA"
 
 
-def parse_file():
-    directions = ""
-    nodes = {}
-    with open(FILE, "r") as f:
-        lines = f.readlines()
-        directions = lines[0]
-        for line in lines[2:]:
-            nodes[line.strip().split(" = ")[0]] = (
-                line.strip().split(" = ")[1].replace("(", "").replace(")", "")
-            )
-    return directions, nodes
+with open("input.txt") as f:
+    lines = f.readlines()
 
+    for char in lines[0].strip():
+        instructions.append(char)
 
-def go(current_pos):
-    if current_pos != "ZZZ":
-        direction = "L"
-        next_pos = get_next_node(direction, current_opts)
-        go(next_pos)
+    for line in lines[2:]:
+        line = line.strip().split(" = ")
+        locations[line[0]] = line[1].replace("(", "").replace(")", "").replace(",", "")
 
-    print(next_pos)
+while current_location != "ZZZ":
+    for instruction in instructions:
+        options = locations[current_location].split(" ")
+        match instruction:
+            case "L":
+                current_location = options[0]
+            case "R":
+                current_location = options[1]
+        steps += 1
 
-
-def get_next_node(direction, opts):
-    if direction == "L":
-        return opts.split(", ")[0]
-    else:
-        return opts.split(", ")[1]
-
-
-def main():
-    #directions, nodes = parse_file()
-    #print(directions)
-    #print(nodes)
-    go("AAA")
-
-
-if __name__ == "__main__":
-    main()
+print(steps)
