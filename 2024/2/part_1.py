@@ -1,18 +1,12 @@
 safe_report_count = 0
 
 def check_all_numbers_increase_or_decrease(numbers):
-    increasing = None
-    for i in range(len(numbers)-1):
-        diff = numbers[i+1] - numbers[i]
-        if increasing is None:
-            increasing = diff > 0
-        elif (diff > 0) != increasing:
-            return False
-    return True
+    original_numbers = numbers.copy()
+    return original_numbers == sorted(numbers) or original_numbers == sorted(numbers, reverse=True)
 
 def check_max_difference(numbers):
-    for i in range(len(numbers)-1):
-        diff = abs(numbers[i+1] - numbers[i])
+    for i in range(1, len(numbers)):
+        diff = abs(numbers[i] - numbers[i-1])
         if diff < 1 or diff > 3:
             return False
     return True
