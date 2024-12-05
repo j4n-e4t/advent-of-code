@@ -25,17 +25,14 @@ for sequence in prints:
         invalid_sequences.append(sequence)
 
 for seq in invalid_sequences:
-    while True:
-        swapped = False
+    swapped = False
+    while not swapped:
         for before, after in rules:
             if before in seq and after in seq:
-                before_i = seq.index(before)
-                after_i = seq.index(after)
-                if before_i > after_i:
-                    seq[before_i], seq[after_i] = seq[after_i], seq[before_i]
+                if seq.index(before) > seq.index(after):
+                    seq[seq.index(before)], seq[seq.index(after)] = seq[seq.index(after)], seq[seq.index(before)]
                     swapped = True
-        if not swapped:
-            break
+        swapped = not swapped
 
     total += seq[len(seq) // 2]
 
